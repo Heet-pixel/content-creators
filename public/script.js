@@ -569,21 +569,21 @@
   var TESTIMONIALS = [
     {
       quote:
-        "[Client review goes here — replace with a genuine, permissioned testimonial.]",
-      name: "[CLIENT NAME]",
-      co: "[COMPANY NAME]",
+        "“Content Crafters gave our real estate brand a completely new look. From property videos and creative posts to social media marketing, their team helped us present our projects professionally and bring in more genuine enquiries.”",
+      name: "yash reality",
+      co: "swastiikgroup",
       stars: 5,
     },
     {
       quote:
-        "[Client review goes here — replace with a genuine, permissioned testimonial.]",
-      name: "[CLIENT NAME]",
-      co: "[COMPANY NAME]",
+        "“They understood exactly how to capture the energy of our dance studio. The reels, videos and social media content have helped us showcase our classes much better and attract more students.”",
+      name: "himani dance studio",
+      co: "HDS",
       stars: 5,
     },
     {
       quote:
-        "[Client review goes here — replace with a genuine, permissioned testimonial.]",
+        "“Content Crafters helped us turn our fashion collection into content that people actually notice. Their photography, video editing and social media creatives made our brand look more premium and helped us connect with a wider audience.”",
       name: "[CLIENT NAME]",
       co: "[COMPANY NAME]",
       stars: 5,
