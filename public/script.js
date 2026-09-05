@@ -440,6 +440,18 @@
     },
 
     {
+      cat: "branding",
+      catLabel: "Branding & Corporate",
+      title: "Brand Social Reel — shirt \u2018N\u2019 Joy",
+      client: "shirt \u2018N\u2019 Joy",
+      desc: "Lifestyle-style social content produced for a shirt.",
+      img: "assets/videos/branding/Personal branding.mp4",
+      poster: "assets/posters/Personal branding.mp4",
+      type: "video",
+      services: "Social Media, Branding",
+    },
+
+    {
       cat: "ai",
       catLabel: "AI Videos",
       title: "AI Avatar Video — AP Dziner",
