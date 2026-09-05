@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  This site is currently a single page, so the sitemap has one entry.
+  If/when dedicated service pages (e.g. /services/seo,
+  /services/social-media-management) are built out, add each as its
+  own <url> entry here with its own <lastmod>.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://contentcrafters.in/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

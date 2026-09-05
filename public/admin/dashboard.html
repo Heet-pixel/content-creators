@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Dashboard | Content Crafters Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+<header class="admin-topbar">
+  <div class="admin-container admin-topbar-inner">
+    <div class="admin-brand">
+      <img src="/assets/logo-compact.png" alt="Content Crafters">
+      <span>Admin</span>
+    </div>
+    <div class="admin-user">
+      <span class="hide-mobile">Signed in as <strong id="adminEmailLabel">—</strong></span>
+      <button class="btn btn-outline btn-sm" id="logoutBtn">Log Out</button>
+    </div>
+  </div>
+</header>
+
+<main class="admin-main">
+  <div class="admin-container">
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="n" id="statTotal">0</div>
+        <div class="l">Total Enquiries</div>
+      </div>
+      <div class="stat-card pending">
+        <div class="n" id="statPending">0</div>
+        <div class="l">Pending</div>
+      </div>
+      <div class="stat-card working">
+        <div class="n" id="statWorking">0</div>
+        <div class="l">Working On</div>
+      </div>
+      <div class="stat-card completed">
+        <div class="n" id="statCompleted">0</div>
+        <div class="l">Completed</div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search by name, business or email…">
+        <select class="status-select" id="statusFilter">
+          <option value="all">All statuses</option>
+          <option value="Pending">Pending</option>
+          <option value="Working On">Working On</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+      <div class="toolbar-right">
+        <button class="btn btn-primary btn-sm" id="addClientBtn">
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          Add Client
+        </button>
+        <button class="btn btn-outline btn-sm" id="exportExcel">
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M12 3v13m0 0 4-4m-4 4-4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Export Excel
+        </button>
+        <button class="btn btn-outline btn-sm" id="exportPdf">
+          <svg viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M12 3v13m0 0 4-4m-4 4-4-4M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Export PDF
+        </button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Contact</th>
+            <th>Business</th>
+            <th>Service</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="enquiriesBody">
+          <tr class="loading-row"><td colspan="7">Loading enquiries…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</main>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <span id="toastMsg"></span>
+</div>
+
+<!-- ============ ADD CLIENT MODAL ============ -->
+<div class="modal-overlay" id="addClientOverlay">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>Add Client Manually</h2>
+      <button type="button" class="icon-btn" id="addClientClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <form id="addClientForm">
+      <div class="modal-error" id="addClientError"></div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="acFullName">Full Name</label>
+          <input type="text" id="acFullName" required>
+        </div>
+        <div class="field">
+          <label for="acBusinessName">Business Name</label>
+          <input type="text" id="acBusinessName" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="acPhone">Phone Number</label>
+          <input type="tel" id="acPhone" required>
+        </div>
+        <div class="field">
+          <label for="acEmail">Email</label>
+          <input type="email" id="acEmail" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="acCategory">Business Category</label>
+          <input type="text" id="acCategory" placeholder="e.g. Real Estate, Jewellery" required>
+        </div>
+        <div class="field">
+          <label for="acService">Service</label>
+          <select id="acService" required>
+            <option value="" disabled selected>Select a service</option>
+            <option>SEO</option>
+            <option>Digital Marketing</option>
+            <option>Social Media</option>
+            <option>Branding</option>
+            <option>Logo Design</option>
+            <option>Banner Design</option>
+            <option>Video Production</option>
+            <option>Video Editing</option>
+            <option>Photography</option>
+            <option>Business Growth</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="acDescription">Project Description</label>
+        <textarea id="acDescription" placeholder="Optional — what does this client need?"></textarea>
+      </div>
+      <div class="field">
+        <label for="acStatus">Status</label>
+        <select id="acStatus">
+          <option value="Pending">Pending</option>
+          <option value="Working On">Working On</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" id="addClientSubmit">Add Client</button>
+    </form>
+  </div>
+</div>
+
+<script src="/admin/admin-dashboard.js"></script>
+</body>
+</html>

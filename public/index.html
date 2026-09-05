@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Content Crafters | Digital Marketing &amp; Creative Agency</title>
+<meta name="description" content="Content Crafters is a full-service digital marketing and creative agency offering SEO, social media marketing, branding, creative design, video production and photography to help businesses grow.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://contentcrafters.in/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Content Crafters">
+<meta property="og:title" content="Content Crafters | Digital Marketing & Creative Agency">
+<meta property="og:description" content="We create, promote and grow businesses through strategy, marketing, branding, content, photography and video — all under one roof.">
+<meta property="og:image" content="https://contentcrafters.in/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://contentcrafters.in/">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Content Crafters | Digital Marketing & Creative Agency">
+<meta name="twitter:description" content="We create, promote and grow businesses through strategy, marketing, branding, content, photography and video — all under one roof.">
+<meta name="twitter:image" content="https://contentcrafters.in/assets/og-cover.jpg">
+
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+
+<!--
+  STRUCTURED DATA — deliberately minimal and accurate.
+  Per Google's guidance, structured data must never contain invented
+  information. Add telephone, email, sameAs (verified social profile
+  URLs) and a LocalBusiness/address block ONLY once those details are
+  confirmed — do not fill them with placeholder text, as that produces
+  invalid structured data.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Content Crafters",
+  "description": "Content Crafters is a full-service digital marketing and creative agency offering SEO, social media marketing, branding, creative design, video production and photography.",
+  "url": "https://contentcrafters.in/",
+  "logo": "https://contentcrafters.in/assets/logo-compact.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Content Crafters",
+  "url": "https://contentcrafters.in/"
+}
+</script>
+</head>
+
+<body class="splash-active">
+
+<!-- =========================================================
+     SPLASH SCREEN — plays the agency reel once, then reveals the site
+     Replace assets/splash-reel.mp4 with any future intro reel.
+     ========================================================= -->
+<div class="splash" id="splash">
+  <video class="splash-bg" src="assets/splash-reel.mp4" autoplay muted loop playsinline></video>
+  <div class="splash-scrim"></div>
+
+  <div class="splash-mark">
+    <img src="assets/logo-light.png" alt="Content Crafters" class="splash-logo">
+    <span class="tag">We Create. We Promote. We Grow.</span>
+  </div>
+
+  <div class="splash-frame">
+    <video id="splashVideo" src="assets/splash-reel.mp4" autoplay muted playsinline></video>
+  </div>
+
+  <div class="splash-bottom">
+    <div class="splash-progress"><div class="splash-progress-bar" id="splashProgressBar"></div></div>
+    <button class="splash-skip" id="splashSkip" aria-label="Skip intro">
+      Skip Intro
+      <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M5 4l14 8-14 8V4z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- =========================================================
+     NAVBAR
+     ========================================================= -->
+<header class="navbar" id="navbar">
+  <div class="container navbar-inner">
+    <a href="#home" class="logo" aria-label="Content Crafters home">
+      <img src="assets/logo-compact.png" alt="Content Crafters" class="logo-img">
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-primary">
+        Let's Grow
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <div class="mobile-menu-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#why">Why Us</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="btn btn-primary btn-block">Let's Grow</a>
+</nav>
+
+<main>
+
+  <!-- =========================================================
+       HERO
+       ========================================================= -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">Digital Growth Agency</div>
+          <h1>We Create. We Promote. <em>We Grow.</em></h1>
+          <p class="lede">Helping businesses build stronger brands, create engaging content and reach the right audience through powerful digital marketing and creative solutions.</p>
+          <div class="hero-cta">
+            <a href="#work" class="btn btn-primary">
+              View Our Work
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#contact" class="btn btn-outline">Let's Grow Your Business</a>
+          </div>
+          <div class="hero-stats-inline">
+            <div><strong>[50]<span class="suffix">+</span></strong><span>Projects delivered</span></div>
+            <div><strong>[20]<span class="suffix">+</span></strong><span>Brands served</span></div>
+            <div><strong>[5]<span class="suffix">+</span></strong><span>Years crafting</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal reveal-2">
+          <div class="hv-ring" aria-hidden="true"></div>
+          <div class="hv-dot" aria-hidden="true"></div>
+          <div class="hv-card hv-2">
+            <img src="assets/posters/jewellery-5.jpg" alt="Jewellery collection product photography by Content Crafters" loading="lazy" width="500" height="620">
+            <span class="hv-badge">Jewellery</span>
+          </div>
+          <div class="hv-card hv-3">
+            <img src="assets/posters/site-walkthrough.jpg" alt="Real estate promotional video still by Content Crafters" loading="lazy" width="500" height="620">
+            <div class="hv-play">
+              <div class="circle"><svg viewBox="0 0 24 24" fill="none"><path d="M6 4l14 8-14 8V4z" fill="#2A3134"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="filmstrip-wrap reveal reveal-3">
+        <div class="filmstrip" id="filmstrip">
+          <!-- duplicated in JS for seamless loop -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       QUICK STATS
+       ========================================================= -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="num"><span class="counter" data-target="50">0</span><span class="suffix">+</span></div>
+          <div class="label">Projects Completed</div>
+        </div>
+        <div class="stat-item reveal reveal-1">
+          <div class="num"><span class="counter" data-target="20">0</span><span class="suffix">+</span></div>
+          <div class="label">Brands Partnered</div>
+        </div>
+        <div class="stat-item reveal reveal-2">
+          <div class="num"><span class="counter" data-target="100">0</span><span class="suffix">+</span></div>
+          <div class="label">Creative Assets Produced</div>
+        </div>
+        <div class="stat-item reveal reveal-3">
+          <div class="num"><span class="counter" data-target="5">0</span><span class="suffix">+</span></div>
+          <div class="label">Years Of Experience</div>
+        </div>
+      </div>
+      <div class="stats-note">* Placeholder figures — replace with Content Crafters' real, verified numbers before launch.</div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ABOUT
+       ========================================================= -->
+  <section class="section-pad" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <img class="tall" src="assets/posters/pre-wedding-01.jpg" alt="Pre-wedding film still — Devam &amp; Helly, by Content Crafters" loading="lazy">
+          <img src="assets/posters/fashion-02.jpg" alt="Fashion styling reel still by Content Crafters" loading="lazy">
+          <img src="assets/posters/cake-01.jpg" alt="Brand social content still — Cake 'N' Joy, by Content Crafters" loading="lazy">
+        </div>
+        <div class="about-body reveal reveal-1">
+          <div class="eyebrow">About Content Crafters</div>
+          <h2 style="font-family:var(--font-display);font-weight:700;font-size:clamp(28px,3.6vw,44px);margin-top:14px;color:var(--darkest);line-height:1.14;">We Turn Ideas Into Impact.</h2>
+          <p style="margin-top:20px;">Content Crafters helps businesses establish a strong digital presence by combining strategy, creativity, marketing, content, branding and technology into one connected process.</p>
+          <p>Instead of forcing every business into the same marketing package, we take the time to understand your business, your audience and your goals — and build a strategy that actually fits, rather than a template that doesn't.</p>
+          <div class="about-pillars">
+            <span class="pillar-chip">Strategy</span>
+            <span class="pillar-chip">Creativity</span>
+            <span class="pillar-chip">Marketing</span>
+            <span class="pillar-chip">Content</span>
+            <span class="pillar-chip">Branding</span>
+            <span class="pillar-chip">Technology</span>
+          </div>
+          <a href="#work" class="btn btn-outline">
+            Know More About Us
+            <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SERVICES
+       ========================================================= -->
+  <section class="section-pad bg-alt" id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">What We Do</div>
+        <h2>Everything Your Brand Needs To Grow.</h2>
+        <p>Nine connected disciplines, one accountable team — from the first strategy call to the final published post.</p>
+      </div>
+
+      <div class="services-grid" id="servicesGrid">
+        <!-- Service cards injected by JS from a single data source for easy maintenance -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ONE PARTNER. COMPLETE GROWTH.
+       ========================================================= -->
+  <section class="section-pad bg-dark partner-section" id="partner">
+    <div class="container">
+      <div class="partner-grid">
+        <div class="reveal">
+          <div class="eyebrow">One Partner. Complete Growth.</div>
+          <h2 style="font-family:var(--font-display);font-weight:700;font-size:clamp(28px,3.6vw,42px);margin-top:14px;line-height:1.15;">Why Work With Multiple Agencies When One Can Do It All?</h2>
+          <p style="margin-top:20px;color:var(--text-on-dark-muted);max-width:52ch;">Growing a brand usually means juggling an SEO agency, a social media manager, a graphic designer, a video editor, a photographer, a branding studio and a marketing agency — all with different priorities. Content Crafters brings every one of those disciplines together under one roof, one strategy and one point of contact.</p>
+
+          <div class="partner-old" style="margin-top:30px;">
+            <span>SEO Agency</span>
+            <span>Social Media Manager</span>
+            <span>Graphic Designer</span>
+            <span>Video Editor</span>
+            <span>Photographer</span>
+            <span>Branding Studio</span>
+            <span>Marketing Agency</span>
+          </div>
+          <div class="partner-arrow">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Becomes one growth partner
+          </div>
+        </div>
+
+        <div class="partner-one reveal reveal-2">
+          <div class="partner-one-item"><span class="n">01</span><h4>One Strategy</h4></div>
+          <div class="partner-one-item"><span class="n">02</span><h4>One Creative Team</h4></div>
+          <div class="partner-one-item"><span class="n">03</span><h4>One Brand Direction</h4></div>
+          <div class="partner-one-item"><span class="n">04</span><h4>One Growth Partner</h4></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       WHY CHOOSE US
+       ========================================================= -->
+  <section class="section-pad" id="why">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Why Choose Us</div>
+        <h2>Why Businesses Choose Content Crafters</h2>
+      </div>
+      <div class="why-grid" id="whyGrid"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       OUR WORK / PORTFOLIO
+       ========================================================= -->
+  <section class="section-pad bg-alt" id="work">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Our Work</div>
+        <h2>Work That Speaks For Itself.</h2>
+        <p>Real work from real shoots — across real estate, jewellery, fashion, weddings, branding and AI video.</p>
+      </div>
+
+      <div class="filter-bar reveal" id="portfolioFilters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="realestate">Real Estate</button>
+        <button class="filter-btn" data-filter="jewellery">Jewellery</button>
+        <button class="filter-btn" data-filter="fashion">Fashion</button>
+        <button class="filter-btn" data-filter="weddings">Weddings &amp; Events</button>
+        <button class="filter-btn" data-filter="branding">Branding &amp; Corporate</button>
+        <button class="filter-btn" data-filter="lifestyle">Interiors &amp; Travel</button>
+        <button class="filter-btn" data-filter="ai">AI Videos</button>
+      </div>
+
+      <div class="portfolio-grid" id="portfolioGrid"></div>
+      <p id="portfolioEmpty" style="display:none;text-align:center;padding:60px 20px;color:var(--text-muted);font-size:15px;"></p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       OUR PROCESS
+       ========================================================= -->
+  <section class="section-pad bg-alt" id="process">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Our Process</div>
+        <h2>How A Project Comes Together.</h2>
+      </div>
+      <div class="process-line" id="processLine"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CLIENT BENEFITS
+       ========================================================= -->
+  <section class="section-pad bg-dark">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Client Benefits</div>
+        <h2>What Changes When You Work With Us?</h2>
+      </div>
+      <div class="benefits-grid" id="benefitsGrid"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       TESTIMONIALS
+       ========================================================= -->
+  <section class="section-pad" id="testimonials">
+    <div class="container">
+      <div class="section-head reveal" style="text-align:center;margin-left:auto;margin-right:auto;">
+        <div class="eyebrow" style="justify-content:center;">What Our Clients Say</div>
+        <h2>Real Feedback From Real Partners.</h2>
+        <p style="margin-left:auto;margin-right:auto;">These are placeholder testimonials — replace with genuine, permissioned client reviews before launch.</p>
+      </div>
+
+      <div class="testi-wrap reveal reveal-2">
+        <div class="testi-track" id="testiTrack"></div>
+        <div class="testi-controls">
+          <button class="testi-arrow" id="testiPrev" aria-label="Previous testimonial">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="testi-dots" id="testiDots"></div>
+          <button class="testi-arrow" id="testiNext" aria-label="Next testimonial">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PRICING / CUSTOM QUOTE
+       ========================================================= -->
+  <section class="section-pad bg-alt">
+    <div class="container">
+      <div class="pricing-box reveal">
+        <div class="eyebrow" style="justify-content:center;">Pricing</div>
+        <h2>Every Business Is Different.</h2>
+        <p>Your goals, audience, industry and requirements are unique. That's why we create customized solutions instead of fixed packages.</p>
+        <a href="#contact" class="btn btn-primary" id="quoteBtn">
+          Get A Custom Quote
+          <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONTACT / LEAD GENERATION
+       ========================================================= -->
+  <section class="section-pad bg-dark" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <div class="eyebrow">Get In Touch</div>
+          <h2>Ready To Grow Your Business?</h2>
+          <p class="lede">Tell us what you're building. We'll help you figure out what comes next.</p>
+          <div class="contact-cta-row">
+            <a href="#enquiryForm" class="btn btn-primary">Start A Project</a>
+            <a href="https://wa.me/[PHONE NUMBER]" target="_blank" rel="noopener" class="btn btn-outline">
+              WhatsApp Us
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20.5 3.5A11 11 0 0 0 3.5 17.6L2 22l4.6-1.4A11 11 0 1 0 20.5 3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <div class="contact-details">
+            <a href="tel:[PHONE NUMBER]"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.4 2.1L8 10.3a16 16 0 0 0 6 6l1.5-1.4a2 2 0 0 1 2-.5c1 .3 2 .5 3 .6a2 2 0 0 1 1.5 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>[PHONE NUMBER]</a>
+            <a href="mailto:[EMAIL ADDRESS]"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4Z" stroke="currentColor" stroke-width="1.6"/><path d="m4 6 8 7 8-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>[EMAIL ADDRESS]</a>
+            <div><svg viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.3 7-12a7 7 0 1 0-14 0c0 5.7 7 12 7 12Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>[BUSINESS LOCATION]</div>
+          </div>
+        </div>
+
+        <div class="form-card reveal reveal-2" id="enquiryForm">
+          <form id="contactForm" novalidate>
+            <div class="form-fields" id="formFields">
+              <div class="form-row">
+                <div class="field" data-field="fullName">
+                  <label for="fullName">Full Name</label>
+                  <input type="text" id="fullName" name="fullName" autocomplete="name" required>
+                  <span class="err-msg">Please enter your full name.</span>
+                </div>
+                <div class="field" data-field="businessName">
+                  <label for="businessName">Business Name</label>
+                  <input type="text" id="businessName" name="businessName" autocomplete="organization" required>
+                  <span class="err-msg">Please enter your business name.</span>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field" data-field="phone">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+                  <span class="err-msg">Please enter a valid phone number.</span>
+                </div>
+                <div class="field" data-field="email">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" autocomplete="email" required>
+                  <span class="err-msg">Please enter a valid email address.</span>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field" data-field="category">
+                  <label for="category">Business Category</label>
+                  <input type="text" id="category" name="category" placeholder="e.g. Fashion, F&amp;B, Real Estate" required>
+                  <span class="err-msg">Please enter your business category.</span>
+                </div>
+                <div class="field" data-field="service">
+                  <label for="service">Services Required</label>
+                  <select id="service" name="service" required>
+                    <option value="" disabled selected>Select a service</option>
+                    <option>SEO</option>
+                    <option>Digital Marketing</option>
+                    <option>Social Media</option>
+                    <option>Branding</option>
+                    <option>Logo Design</option>
+                    <option>Banner Design</option>
+                    <option>Video Production</option>
+                    <option>Video Editing</option>
+                    <option>Photography</option>
+                    <option>Business Growth</option>
+                    <option>Other</option>
+                  </select>
+                  <span class="err-msg">Please select a service.</span>
+                </div>
+              </div>
+              <div class="field" data-field="description">
+                <label for="description">Project Description</label>
+                <textarea id="description" name="description" placeholder="Tell us a bit about what you're looking to achieve" required></textarea>
+                <span class="err-msg">Please add a short project description.</span>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">
+                Send Enquiry
+                <svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <p class="form-note">We'll get back to you within 1–2 business days.</p>
+            </div>
+
+            <div class="form-success" id="formSuccess">
+              <div class="check"><svg viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Enquiry Sent</h3>
+              <p>Thanks for reaching out — our team will be in touch shortly.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="logo"><img src="assets/logo-compact-light.png" alt="Content Crafters" class="logo-img"></a>
+        <p>Creative solutions. Digital growth. Stronger brands.</p>
+        <div class="footer-social">
+          <a href="[INSTAGRAM LINK]" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="[FACEBOOK LINK]" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M14 9h3V6h-3c-2 0-3.5 1.6-3.5 3.5V12H8v3h2.5v6h3v-6H16l.5-3h-3V9.8c0-.5.2-.8.7-.8Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></a>
+          <a href="[YOUTUBE LINK]" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M11 10.5v3l3-1.5-3-1.5Z" fill="currentColor"/></svg></a>
+          <a href="[LINKEDIN LINK]" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M8 10v6M8 7.5v.01M12 16v-3.5c0-1.5 1-2.5 2.3-2.5 1.2 0 1.7.9 1.7 2.5V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Navigate</h4>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#work">Our Work</a>
+          <a href="#why">Why Us</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Services</h4>
+        <div class="footer-links">
+          <a href="#services">SEO</a>
+          <a href="#services">Digital Marketing</a>
+          <a href="#services">Branding</a>
+          <a href="#services">Video Production</a>
+          <a href="#services">Social Media</a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <div class="footer-contact">
+          <div><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.4 2.1L8 10.3a16 16 0 0 0 6 6l1.5-1.4a2 2 0 0 1 2-.5c1 .3 2 .5 3 .6a2 2 0 0 1 1.5 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>[PHONE NUMBER]</div>
+          <div><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4Z" stroke="currentColor" stroke-width="1.6"/><path d="m4 6 8 7 8-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>[EMAIL ADDRESS]</div>
+          <div><svg viewBox="0 0 24 24" fill="none"><path d="M20.5 3.5A11 11 0 0 0 3.5 17.6L2 22l4.6-1.4A11 11 0 1 0 20.5 3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>[WHATSAPP NUMBER]</div>
+          <div><svg viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.3 7-12a7 7 0 1 0-14 0c0 5.7 7 12 7 12Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>[BUSINESS LOCATION]</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Content Crafters. All Rights Reserved.</span>
+      <span>Site by Content Crafters</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Portfolio / Case-study modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <img class="modal-media" id="modalMedia" src="" alt="">
+    <div class="modal-body">
+      <div class="portfolio-cat" id="modalCat"></div>
+      <h3 id="modalTitle"></h3>
+      <div class="modal-meta">
+        <div><span>Client</span><strong id="modalClient"></strong></div>
+        <div><span>Services</span><strong id="modalServices"></strong></div>
+      </div>
+      <p class="desc" id="modalDesc"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Video modal -->
+<div class="video-modal-overlay" id="videoModalOverlay">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" id="videoModalClose" aria-label="Close video">
+      <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <video id="videoModalPlayer" playsinline></video>
+    <div class="video-modal-controls">
+      <button class="vm-btn" id="vmPlayPause" aria-label="Play or pause">
+        <svg viewBox="0 0 24 24" fill="none" id="vmPlayIcon"><path d="M6 4l14 8-14 8V4z" fill="currentColor"/></svg>
+      </button>
+      <button class="vm-btn" id="vmMute" aria-label="Mute or unmute">
+        <svg viewBox="0 0 24 24" fill="none" id="vmMuteIcon"><path d="M4 9v6h4l5 5V4L8 9H4Z" fill="currentColor"/></svg>
+      </button>
+      <button class="vm-btn" id="vmFullscreen" aria-label="Fullscreen" style="margin-left:auto;">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <span id="toastMsg">Message sent</span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
