@@ -585,6 +585,7 @@
       quote:
         "“Content Crafters helped us turn our fashion collection into content that people actually notice. Their photography, video editing and social media creatives made our brand look more premium and helped us connect with a wider audience.”",
       name: "Gabardine",
+      co: " ",
       stars: 5,
     },
   ];
