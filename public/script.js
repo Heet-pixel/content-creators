@@ -570,8 +570,8 @@
     {
       quote:
         "“Content Crafters gave our real estate brand a completely new look. From property videos and creative posts to social media marketing, their team helped us present our projects professionally and bring in more genuine enquiries.”",
-      name: "yash reality",
-      co: "swastiikgroup",
+      name: "yash ",
+      co: "Yash reality",
       stars: 5,
     },
     {
@@ -584,8 +584,7 @@
     {
       quote:
         "“Content Crafters helped us turn our fashion collection into content that people actually notice. Their photography, video editing and social media creatives made our brand look more premium and helped us connect with a wider audience.”",
-      name: "[CLIENT NAME]",
-      co: "[COMPANY NAME]",
+      name: "Gabardine",
       stars: 5,
     },
   ];
