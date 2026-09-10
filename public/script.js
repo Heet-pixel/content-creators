@@ -505,7 +505,7 @@
       client: "Nexus Overseas Services Kota Pvt. Ltd.",
       desc: "AI-generated presenter-style video produced for a corporate client.",
       img: "assets/videos/ai/ai-02.mp4",
-      poster: "assets/posters/ai  2.jpg",
+      poster: "assets/posters/ai2.jpg",
       type: "video",
       services: "AI Video Production",
     },
