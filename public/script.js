@@ -372,7 +372,7 @@
     {
       cat: "jewellery",
       catLabel: "Jewellery & Luxury",
-      title: "Elegance That Shines",
+      title: "Heritage in Every Detail",
       client: "Jewellery Brand",
       desc: "Product-style reel from a jewellery collection shoot.",
       img: "assets/videos/jewellery/8.mp4",
@@ -395,7 +395,7 @@
     {
       cat: "fashion",
       catLabel: "Fashion & Lifestyle",
-      title: "Style in Motion",
+      title: "Details That Define Style",
       client: "Fashion Brand",
       desc: "Fashion styling reel produced for social distribution.",
       img: "assets/videos/fashion/fashion-02.mp4",
@@ -406,7 +406,7 @@
     {
       cat: "fashion",
       catLabel: "Fashion & Lifestyle",
-      title: "Style in Motion",
+      title: "The Statement Look",
       client: "Fashion Brand",
       desc: "Fashion styling reel produced for social distribution.",
       img: "assets/videos/fashion/fashion-03.mp4",
@@ -418,11 +418,11 @@
     {
       cat: "weddings",
       catLabel: "Weddings & Events",
-      title: "Pre-Wedding Film — Devam & Helly",
+      title: "Pre-Wedding Film — Devam & Hellya",
       client: "Devam & Helly",
       desc: "Cinematic pre-wedding film shot across multiple outdoor and indoor locations.",
       img: "assets/videos/weddings/pre-wedding-01.mp4",
-      poster: "assets/posters/pre-wedding-01.jpg",
+      poster: "assets/posters/weding2.jpg",
       type: "video",
       services: "Wedding Film, Video Editing",
     },
@@ -434,7 +434,7 @@
       client: "Wedding Shoot",
       desc: "Cinematic pre-wedding film shot across multiple outdoor and indoor locations.",
       img: "assets/videos/weddings/Wedding.mp4",
-      poster: "assets/posters/weddings.png",
+      poster: "assets/posters/weding.jpg",
       type: "video",
       services: "Wedding, Pre-Wedding & Photography",
     },
@@ -458,7 +458,7 @@
       client: "Clothing Brand",
       desc: "Lifestyle-style social content produced for a shirt.",
       img: "assets/videos/branding/Personal branding.mp4",
-      poster: "assets/posters/shirt.png",
+      poster: "assets/posters/shirt.jpg",
       type: "video",
       services: "Fashion, Product & Lifestyle",
     },
@@ -467,22 +467,22 @@
       cat: "branding",
       catLabel: "Dance & Lifestyle",
       title: "Dance in Motion",
-      client: "HDS",
+      client: "HDS-Himani Dance Studio",
       desc: "Dynamic dance content capturing rhythm, confidence, energy, and expressive movement.",
       img: "assets/videos/branding/dance.mp4",
-      poster: "assets/posters/dance.png",
+      poster: "assets/posters/hds.jpg",
       type: "video",
       services: "Dance, Fashion & Lifestyle",
     },
 
     {
-      cat: "Interiors & Travel",
-      catLabel: "Travel & Lifestyle",
+      cat: "interiors-travel",
+      catLabel: "Interiors & Travel",
       title: "Wander Beyond",
       client: "Travel Shoot",
       desc: "Cinematic travel content capturing adventure, freedom, breathtaking destinations, and unforgettable moments.",
-      img: "assets/videos/travels/travel.mp4",
-      poster: "assets/posters/travel.png",
+      img: "assets/videos/travels/Travel.mp4",
+      poster: "assets/posters/travel.jpg",
       type: "video",
       services: "Travel, Lifestyle & Photography",
     },
@@ -505,7 +505,7 @@
       client: "Nexus Overseas Services Kota Pvt. Ltd.",
       desc: "AI-generated presenter-style video produced for a corporate client.",
       img: "assets/videos/ai/ai-02.mp4",
-      poster: "assets/posters/ai-02.jpg",
+      poster: "assets/posters/ai  2.jpg",
       type: "video",
       services: "AI Video Production",
     },
@@ -569,24 +569,30 @@
   var TESTIMONIALS = [
     {
       quote:
-        "“Content Crafters gave our real estate brand a completely new look. From property videos and creative posts to social media marketing, their team helped us present our projects professionally and bring in more genuine enquiries.”",
-      name: "yash ",
-      co: "Yash reality",
+        "\u201cContent Crafters gave our real estate brand a completely new look. From property videos and creative posts to social media marketing, their team helped us present our projects professionally and bring in more genuine enquiries.\u201d",
+      name: "Yash",
+      co: "Yash Realty",
       stars: 5,
+      logo: "assets/testimonials/yashlogo.png",
+      image: "assets/testimonials/podcast-interview.jpg",
     },
     {
       quote:
-        "“They understood exactly how to capture the energy of our dance studio. The reels, videos and social media content have helped us showcase our classes much better and attract more students.”",
-      name: "himani dance studio",
+        "\u201cThey understood exactly how to capture the energy of our dance studio. The reels, videos and social media content have helped us showcase our classes much better and attract more students.\u201d",
+      name: "Himani Dance Studio",
       co: "HDS",
       stars: 5,
+      logo: "assets/testimonials/hds-logo.png",
+      image: "assets/testimonials/hds-client.jpg",
     },
     {
       quote:
-        "“Content Crafters helped us turn our fashion collection into content that people actually notice. Their photography, video editing and social media creatives made our brand look more premium and helped us connect with a wider audience.”",
+        "\u201cContent Crafters helped us turn our fashion collection into content that people actually notice. Their photography, video editing and social media creatives made our brand look more premium and helped us connect with a wider audience.\u201d",
       name: "Gabardine",
-      co: " ",
+      co: "Fashion Brand",
       stars: 5,
+      logo: "assets/testimonials/gabardine-logo.png",
+      image: "assets/testimonials/fashion.jpg",
     },
   ];
 
@@ -913,28 +919,65 @@
     var nextBtn = document.getElementById("testiNext");
     if (!track) return;
 
+    track.addEventListener(
+      "error",
+      function (event) {
+        var image = event.target;
+        if (!image.matches || !image.matches(".testi-logo img")) return;
+        var box = image.parentNode;
+        if (!box) return;
+        box.classList.add("testi-logo-fallback");
+        box.textContent = (image.alt || "?").charAt(0).toUpperCase();
+      },
+      true,
+    );
+
     track.innerHTML = TESTIMONIALS.map(function (t) {
       var stars = "";
       for (var i = 0; i < t.stars; i++) stars += starSvg();
       var initial = (t.name || "?").replace("[", "").charAt(0).toUpperCase();
+
+      var logoHtml = t.logo
+        ? '<div class="testi-logo"><img src="' +
+          t.logo +
+          '" alt="' +
+          t.co +
+          ' logo" onerror="this.style.display=\'none\'"></div>'
+        : '<div class="testi-logo testi-logo-fallback">' + initial + "</div>";
+
+      var imageHtml = t.image
+        ? '<div class="testi-client-img"><img src="' +
+          t.image +
+          '" alt="' +
+          t.name +
+          '" onerror="this.parentNode.style.display=\'none\'"></div>'
+        : '<div class="testi-client-img testi-client-placeholder">' +
+          initial +
+          "</div>";
+
       return (
-        "" +
         '<div class="testi-slide">' +
+        '<div class="testi-card">' +
+        imageHtml +
+        '<div class="testi-content">' +
         '<div class="testi-stars">' +
         stars +
         "</div>" +
-        '<p class="quote">\u201C' +
+        '<p class="quote">' +
         t.quote +
-        "\u201D</p>" +
+        "</p>" +
         '<div class="testi-person">' +
-        '<div class="testi-avatar">' +
-        initial +
-        "</div>" +
-        '<div><div class="name">' +
+        logoHtml +
+        "<div>" +
+        '<div class="name">' +
         t.name +
-        '</div><div class="co">' +
+        "</div>" +
+        '<div class="co">' +
         t.co +
-        "</div></div>" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
         "</div>" +
         "</div>"
       );
