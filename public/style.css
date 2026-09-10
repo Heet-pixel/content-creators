@@ -1172,7 +1172,8 @@ body.splash-active{ overflow: hidden; height: 100%; }
 /* Mobile: stack vertically */
 @media (max-width: 600px){
   .testi-card{ flex-direction: column; }
-  .testi-client-img{ flex: 0 0 200px; width: 100%; height: 200px; }
+  .testi-client-img{ flex: 0 0 320px; width: 100%; height: 320px; align-self: stretch; }
+  .testi-client-img img{ object-position: top center; }
 }
 .testi-controls{
   display: flex; align-items: center; justify-content: center; gap: 20px;
