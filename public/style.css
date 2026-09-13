@@ -450,7 +450,7 @@ body.splash-active{ overflow: hidden; height: 100%; }
 .hero-visual{
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 16px;
   min-height: 420px;
 }
@@ -463,8 +463,8 @@ body.splash-active{ overflow: hidden; height: 100%; }
   aspect-ratio: 4/5;
 }
 .hv-card img, .hv-card video{ width: 100%; height: 100%; object-fit: cover; }
-.hv-2{ margin-top: 34px; }
-.hv-3{ display: flex; align-items: center; justify-content: center; background: var(--darkest); }
+.hv-2{ margin-top: 0; aspect-ratio: 3/2; }
+.hv-3{ display: none; }
 .hv-play{
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
@@ -1398,7 +1398,6 @@ body.splash-active{ overflow: hidden; height: 100%; }
   .hero-cta{ flex-direction: column; }
   .hero-cta .btn{ width: 100%; }
   .hero-visual{ min-height: unset; gap: 10px; }
-  .hv-2{ margin-top: 0; }
   .filter-bar{ gap: 8px; }
   .filter-btn{ padding: 8px 14px; font-size: 11.5px; }
 }

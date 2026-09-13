@@ -469,7 +469,7 @@
       title: "Dance in Motion",
       client: "HDS-Himani Dance Studio",
       desc: "Dynamic dance content capturing rhythm, confidence, energy, and expressive movement.",
-      img: "assets/videos/branding/dance.mp4",
+      img: "assets/videos/branding/dance1.mp4",
       poster: "assets/posters/hds.jpg",
       type: "video",
       services: "Dance, Fashion & Lifestyle",
@@ -591,7 +591,7 @@
       name: "Gabardine",
       co: "Fashion Brand",
       stars: 5,
-      logo: "assets/testimonials/gabardine-logo.png",
+      logo: "assets/testimonials/gabardi-logo.png",
       image: "assets/testimonials/fashion.jpg",
     },
   ];
