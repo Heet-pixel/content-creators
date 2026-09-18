@@ -22,12 +22,15 @@ app.get(["/admin/dashboard", "/admin/dashboard/"], (req, res) =>
   res.sendFile(path.join(__dirname, "public", "admin", "dashboard.html")),
 );
 
-// ─── Redirect video requests to S3 ────────────────────────────────────────
+// ─── Video CDN base URL ───────────────────────────────────────────────────
 // Lambda has a 6 MB response limit — any MP4 larger than that returns a
-// 502 Bad Gateway. We redirect /assets/videos/* and the splash reel to
-// S3 where the files live, so the browser streams directly from S3.
+// 502 Bad Gateway. Set S3_BASE_URL in your Lambda env vars to your S3
+// bucket URL (e.g. https://your-bucket.s3.amazonaws.com or CloudFront URL).
+// The client JS reads window.__VIDEO_BASE__ and prepends it to all video
+// src attributes, so videos stream directly from S3/CloudFront.
 const S3_BASE = (process.env.S3_BASE_URL || "").replace(/\/$/, "");
 
+// Also keep the server-side redirect as a fallback for direct URL access
 if (S3_BASE) {
   app.get("/assets/splash-reel.mp4", (req, res) =>
     res.redirect(301, `${S3_BASE}/assets/splash-reel.mp4`),
@@ -36,6 +39,20 @@ if (S3_BASE) {
     res.redirect(301, `${S3_BASE}${req.path}`),
   );
 }
+
+// ─── Inject VIDEO_BASE into HTML ──────────────────────────────────────────
+// Intercept index.html and prepend a <script> tag so the client knows
+// where to load videos from without going through Lambda.
+app.get(["/", "/index.html"], (req, res, next) => {
+  const fs = require("fs");
+  const htmlPath = require("path").join(__dirname, "public", "index.html");
+  let html = fs.readFileSync(htmlPath, "utf8");
+  const injection = `<script>window.__VIDEO_BASE__="${S3_BASE}";</script>`;
+  html = html.replace("<script src=\"script.js\">", injection + "\n<script src=\"script.js\">");
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.setHeader("Cache-Control", "no-cache");
+  res.send(html);
+});
 
 // ─── Static frontend (images, CSS, JS, posters, HTML) ─────────────────────
 // Images and posters are small enough to pass through Lambda fine.
