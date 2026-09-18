@@ -55,6 +55,14 @@
     // Set video src — always via videoSrc() so S3_BASE_URL is respected
     var splashReelSrc = videoSrc("assets/splash-reel.mp4");
 
+    if (!VIDEO_BASE) {
+      console.warn(
+        "[ContentCrafters] S3_BASE_URL is not set in Lambda env vars. " +
+          "Videos are routing through Lambda (6 MB limit) and will fail. " +
+          "Follow DEPLOY_GUIDE.md to set up S3.",
+      );
+    }
+
     // Wait for enough data before calling play() — calling play() right after
     // src assignment fails because the browser hasn't fetched anything yet.
     video.addEventListener("canplay", function onCanPlay() {
@@ -905,12 +913,21 @@
       return;
     }
 
-    // Reset player state
+    // Warn in console if S3 is not configured — videos will fail
+    if (!VIDEO_BASE) {
+      console.warn(
+        "[ContentCrafters] VIDEO_BASE is not set. Videos are being served " +
+          "through Lambda which has a 6 MB limit. Set S3_BASE_URL in your " +
+          "Lambda environment variables. See DEPLOY_GUIDE.md.",
+      );
+    }
+
+    // Reset player — clear any previous src first
     videoModalPlayer.pause();
     videoModalPlayer.removeAttribute("src");
     videoModalPlayer.load();
 
-    // Show modal immediately with spinner
+    // Show modal with spinner immediately
     showVmSpinner();
     videoModalOverlay.classList.add("active");
     document.documentElement.classList.add("no-scroll");
@@ -920,20 +937,37 @@
     if (v.poster) videoModalPlayer.setAttribute("poster", videoSrc(v.poster));
     else videoModalPlayer.removeAttribute("poster");
 
-    // Lazy-load: only assign src now (after modal is open)
-    // videoSrc() redirects to S3 if VIDEO_BASE is set
+    // Remove any stale handlers
+    videoModalPlayer.oncanplay = null;
+    videoModalPlayer.onerror = null;
+
+    // canplay fires once enough data is buffered — only then do we play
+    videoModalPlayer.oncanplay = function () {
+      videoModalPlayer.oncanplay = null;
+      hideVmSpinner();
+      videoModalPlayer.play().catch(function () {});
+    };
+
+    // If the video URL is unreachable (Lambda 502, wrong S3 path, CORS) —
+    // show a helpful toast instead of spinning forever
+    videoModalPlayer.onerror = function () {
+      videoModalPlayer.onerror = null;
+      hideVmSpinner();
+      showToast(
+        VIDEO_BASE
+          ? "Video failed to load. Check that the file is uploaded to S3 and the bucket is public."
+          : "Video failed to load — S3_BASE_URL is not set in Lambda. See DEPLOY_GUIDE.md.",
+      );
+    };
+
+    // Lazy-load: set src AFTER registering handlers
     videoModalPlayer.src = videoSrc(v.src);
     videoModalPlayer.muted = false;
     videoModalPlayer.currentTime = 0;
+    videoModalPlayer.load();
 
-    // Hide spinner once enough data is buffered to play
-    videoModalPlayer.oncanplay = function () {
-      hideVmSpinner();
-      videoModalPlayer.play().catch(function () {});
-      videoModalPlayer.oncanplay = null;
-    };
-    // Safety net: hide spinner after 10s regardless
-    setTimeout(hideVmSpinner, 10000);
+    // Safety net: hide spinner after 15s regardless
+    setTimeout(hideVmSpinner, 15000);
   }
   function closeVideoModal() {
     videoModalPlayer.pause();

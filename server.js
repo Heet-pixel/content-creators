@@ -43,12 +43,17 @@ if (S3_BASE) {
 // ─── Inject VIDEO_BASE into HTML ──────────────────────────────────────────
 // Intercept index.html and prepend a <script> tag so the client knows
 // where to load videos from without going through Lambda.
-app.get(["/", "/index.html"], (req, res, next) => {
+app.get(["/", "/index.html"], (req, res) => {
   const fs = require("fs");
   const htmlPath = require("path").join(__dirname, "public", "index.html");
   let html = fs.readFileSync(htmlPath, "utf8");
+  // Inject VIDEO_BASE before </body> — works regardless of script tag format
   const injection = `<script>window.__VIDEO_BASE__="${S3_BASE}";</script>`;
-  html = html.replace("<script src=\"script.js\">", injection + "\n<script src=\"script.js\">");
+  if (html.includes("</body>")) {
+    html = html.replace("</body>", injection + "\n</body>");
+  } else {
+    html += injection;
+  }
   res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.setHeader("Cache-Control", "no-cache");
   res.send(html);
