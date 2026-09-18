@@ -12,11 +12,25 @@
   ).matches;
 
   /* ---------------------------------------------------------
+     0. VIDEO BASE URL
+     If S3_BASE_URL is configured on the server, window.__VIDEO_BASE__
+     is injected into the page so all video src attributes point directly
+     to S3 / CloudFront, bypassing Lambda's 6 MB response limit.
+  --------------------------------------------------------- */
+  var VIDEO_BASE = (window.__VIDEO_BASE__ || "").replace(/\/$/, "");
+  function videoSrc(path) {
+    // path is like "assets/videos/branding/cake-01.mp4"
+    if (VIDEO_BASE) return VIDEO_BASE + "/" + path;
+    return path; // local dev fallback — serves from express static
+  }
+
+  /* ---------------------------------------------------------
      1. SPLASH SCREEN
   --------------------------------------------------------- */
   (function splash() {
     var splashEl = document.getElementById("splash");
     var video = document.getElementById("splashVideo");
+    var videoBg = document.querySelector(".splash-bg");
     var progressBar = document.getElementById("splashProgressBar");
     var skipBtn = document.getElementById("splashSkip");
     var body = document.body;
@@ -30,10 +44,39 @@
       setTimeout(
         function () {
           splashEl.setAttribute("hidden", "");
+          // Free memory — stop downloading the splash video once hidden
+          video.removeAttribute("src");
+          video.load();
         },
         prefersReducedMotion ? 0 : 900,
       );
     }
+
+    // Set video src — always via videoSrc() so S3_BASE_URL is respected
+    var splashReelSrc = videoSrc("assets/splash-reel.mp4");
+
+    // Wait for enough data before calling play() — calling play() right after
+    // src assignment fails because the browser hasn't fetched anything yet.
+    video.addEventListener("canplay", function onCanPlay() {
+      video.removeEventListener("canplay", onCanPlay);
+      video.play().catch(function () {
+        // Autoplay blocked (e.g. desktop Chrome without mute) — close splash
+        // after a short delay so user isn't stuck
+        setTimeout(closeSplash, 2000);
+      });
+    });
+
+    // If video fails to load at all (wrong URL, CORS, network) — skip splash
+    video.addEventListener("error", function () {
+      closeSplash();
+    });
+
+    video.src = splashReelSrc;
+    if (videoBg) {
+      videoBg.src = splashReelSrc;
+      videoBg.load();
+    }
+    video.load();
 
     // Skip splash entirely for reduced-motion users
     if (prefersReducedMotion) {
@@ -41,29 +84,9 @@
       return;
     }
 
-    // Skip if already seen this session (nice repeat-visit UX)
-    var seen = false;
-    try {
-      seen = sessionStorage.getItem("cc_splash_seen") === "1";
-    } catch (e) {}
-    if (seen) {
-      closeSplash();
-      return;
-    }
+    skipBtn.addEventListener("click", closeSplash);
 
-    skipBtn.addEventListener("click", function () {
-      try {
-        sessionStorage.setItem("cc_splash_seen", "1");
-      } catch (e) {}
-      closeSplash();
-    });
-
-    video.addEventListener("ended", function () {
-      try {
-        sessionStorage.setItem("cc_splash_seen", "1");
-      } catch (e) {}
-      closeSplash();
-    });
+    video.addEventListener("ended", closeSplash);
 
     video.addEventListener("timeupdate", function () {
       if (video.duration) {
@@ -680,27 +703,34 @@
   function renderPortfolio() {
     if (!portfolioGrid) return;
     portfolioGrid.innerHTML = PORTFOLIO.map(function (p, i) {
-      var thumbSrc = p.type === "video" ? p.poster || p.img : p.img;
-      var thumb =
-        '<img src="' +
-        thumbSrc +
-        '" alt="' +
-        p.title +
-        ' by Content Crafters" loading="lazy">';
+      // For video cards: use poster image if available, otherwise hide the
+      // <img> and rely on CSS skeleton until the poster loads.
+      // Never use the .mp4 as thumbnail src — that forces Lambda to serve it.
+      var thumbSrc = p.poster || (p.type !== "video" ? p.img : "");
+      var thumb = thumbSrc
+        ? '<img src="' +
+          thumbSrc +
+          '" alt="' +
+          p.title +
+          ' by Content Crafters" loading="lazy" class="portfolio-thumb" ' +
+          "onload=\"this.classList.add('loaded')\">"
+        : '<div class="portfolio-thumb-skeleton"></div>';
       var playBtn =
         p.type === "video"
           ? '<div class="video-play-btn"><div class="circle"><svg viewBox="0 0 24 24" fill="none"><path d="M6 4l14 8-14 8V4z" fill="currentColor"/></svg></div></div>'
           : "";
+      var badge =
+        p.type === "video" ? '<span class="portfolio-badge">Video</span>' : "";
       return (
         "" +
-        '<div class="portfolio-item" data-cat="' +
+        '<div class="portfolio-item skeleton-wrap" data-cat="' +
         p.cat +
         '" data-index="' +
         i +
         '">' +
         thumb +
         playBtn +
-        '<span class="portfolio-badge">Video</span>' +
+        badge +
         '<div class="portfolio-overlay">' +
         '<div class="portfolio-cat">' +
         p.catLabel +
@@ -858,6 +888,15 @@
   var ICON_UNMUTE =
     '<path d="M4 9v6h4l5 5V4L8 9H4Z" fill="currentColor"/><path d="M17.5 8.5a5 5 0 0 1 0 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
 
+  var videoModalSpinner = document.getElementById("vmSpinner");
+
+  function showVmSpinner() {
+    if (videoModalSpinner) videoModalSpinner.style.display = "flex";
+  }
+  function hideVmSpinner() {
+    if (videoModalSpinner) videoModalSpinner.style.display = "none";
+  }
+
   function openVideoModal(v) {
     if (!v.src) {
       showToast(
@@ -865,19 +904,43 @@
       );
       return;
     }
-    if (v.poster) videoModalPlayer.setAttribute("poster", v.poster);
-    else videoModalPlayer.removeAttribute("poster");
-    videoModalPlayer.src = v.src;
-    videoModalPlayer.muted = false;
-    videoModalPlayer.currentTime = 0;
-    videoModalPlayer.play().catch(function () {});
-    vmPlayIcon.innerHTML = ICON_PAUSE;
-    vmMuteIcon.innerHTML = ICON_UNMUTE;
+
+    // Reset player state
+    videoModalPlayer.pause();
+    videoModalPlayer.removeAttribute("src");
+    videoModalPlayer.load();
+
+    // Show modal immediately with spinner
+    showVmSpinner();
     videoModalOverlay.classList.add("active");
     document.documentElement.classList.add("no-scroll");
+    vmPlayIcon.innerHTML = ICON_PAUSE;
+    vmMuteIcon.innerHTML = ICON_UNMUTE;
+
+    if (v.poster) videoModalPlayer.setAttribute("poster", videoSrc(v.poster));
+    else videoModalPlayer.removeAttribute("poster");
+
+    // Lazy-load: only assign src now (after modal is open)
+    // videoSrc() redirects to S3 if VIDEO_BASE is set
+    videoModalPlayer.src = videoSrc(v.src);
+    videoModalPlayer.muted = false;
+    videoModalPlayer.currentTime = 0;
+
+    // Hide spinner once enough data is buffered to play
+    videoModalPlayer.oncanplay = function () {
+      hideVmSpinner();
+      videoModalPlayer.play().catch(function () {});
+      videoModalPlayer.oncanplay = null;
+    };
+    // Safety net: hide spinner after 10s regardless
+    setTimeout(hideVmSpinner, 10000);
   }
   function closeVideoModal() {
     videoModalPlayer.pause();
+    // Clear src so the browser stops downloading in the background
+    videoModalPlayer.removeAttribute("src");
+    videoModalPlayer.load();
+    hideVmSpinner();
     videoModalOverlay.classList.remove("active");
     document.documentElement.classList.remove("no-scroll");
   }
